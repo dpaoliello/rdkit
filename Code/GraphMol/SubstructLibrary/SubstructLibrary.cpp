@@ -32,8 +32,8 @@
 #include <RDGeneral/RDThreads.h>
 #ifdef RDK_THREADSAFE_SSS
 #include <thread>
-#include <future>
 #endif
+#include <future>
 
 #include <atomic>
 #include <GraphMol/Substruct/SubstructMatch.h>

@@ -54,7 +54,7 @@ void addPatterns(SubstructLibrary &sslib, int numThreads) {
     fut.get();
   }
 #else
-  fillPaterns(lib, fps, 0, sslib.size(), 1);
+  fillPatterns(sslib, *ptr, fps, 0, sslib.size(), 1);
 #endif
   if (ptr->size() != sslib.size()) {
     throw ValueErrorException("Number of fingerprints generated not equal to current number of molecules");
