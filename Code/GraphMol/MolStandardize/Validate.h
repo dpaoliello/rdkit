@@ -41,7 +41,7 @@ class RDKIT_MOLSTANDARDIZE_EXPORT ValidationErrorInfo : public std::exception {
   };
   const char *what() const noexcept override { return d_msg.c_str(); };
   const char *message() const noexcept { return what(); };
-  ~ValidationErrorInfo() noexcept {};
+  virtual ~ValidationErrorInfo() noexcept {};
 
  private:
   std::string d_msg;
@@ -50,7 +50,9 @@ class RDKIT_MOLSTANDARDIZE_EXPORT ValidationErrorInfo : public std::exception {
 //! The ValidationMethod class is the abstract base class upon which all the
 // four different ValidationMethods inherit from.
 class RDKIT_MOLSTANDARDIZE_EXPORT ValidationMethod {
- public:
+public:
+
+  virtual ~ValidationMethod() = default;
   virtual std::vector<ValidationErrorInfo> validate(
       const ROMol &mol, bool reportAllFailures) const = 0;
 };
@@ -77,7 +79,9 @@ class RDKIT_MOLSTANDARDIZE_EXPORT RDKitValidation : public ValidationMethod {
 // NeutralValidation, IsotopeValidation. MolVS also has IsNoneValidation and
 // DichloroethaneValidation but these were not included here (yet).
 class RDKIT_MOLSTANDARDIZE_EXPORT MolVSValidations {
- public:
+public:
+  virtual ~MolVSValidations() = default;
+
   virtual void run(const ROMol &mol, bool reportAllFailures,
                    std::vector<ValidationErrorInfo> &errors) const = 0;
   virtual boost::shared_ptr<MolVSValidations> copy() const = 0;
